@@ -1,7 +1,6 @@
-
 <script>
-    import { browser } from '$app/environment';
-    import { onMount } from 'svelte';
+    import {browser} from '$app/environment';
+    import {onMount} from 'svelte';
 
     let nick = '';
     let isSwimmer = '';
@@ -33,10 +32,12 @@
         onMount(() => {
             // Debounce the uniqueness check to avoid too many API calls
             let timeout;
+
             function debouncedCheck() {
                 clearTimeout(timeout);
                 timeout = setTimeout(() => checkNicknameUniqueness(nick), 500);
             }
+
             return debouncedCheck;
         });
     }
@@ -51,17 +52,17 @@
                 },
                 body: JSON.stringify(formData)
             });
-            
+
             return await response.json(); // or handle the response as needed
         } catch (error) {
             console.error('Submission error:', error);
-            alert('There was an error submitting the form.');
+            alert('Došlo k chybě.');
         }
     }
 
     // Adjusted function to handle the form submission
     async function submitForm() {
-        if (!validateNickname(nick)||!(validateNickname(friendNick)||friendNick==="")){
+        if (!validateNickname(nick) || !(validateNickname(friendNick) || friendNick === "")) {
             alert('Vstupní udáje nejsou validní');
             return false;
 
@@ -73,15 +74,15 @@
         }
 
 
-        if(!isSwimmer) {
+        if (!isSwimmer) {
             alert('Musíte umět plavat');
             return false;
         }
-            // Construct the form data object
+        // Construct the form data object
         const formData = {
-            nick,
+            nick: nick.toLowerCase().trim(),
             isSwimmer,
-            friendNick: friendNick || null  // Optional field
+            friendNick: friendNick.toLowerCase().trim() || null  // Optional field
         };
 
         // Submit the form data
@@ -91,10 +92,8 @@
             // Optionally reset the form or redirect the user
             window.history.back()
         } else {
-            alert('Registration failed. Please try again.');
+            alert('Registrace se nepovedla. Prosím zkuste znovu');
         }
-
-        // Proceed with form submission logic...
     }
 </script>
 
@@ -106,11 +105,10 @@
                id="nick"
                name="nick"
                bind:value={nick}
-               on:input={() => checkNicknameUniqueness(nick)}
+               on:input={() => checkNicknameUniqueness(nick.toLowerCase().trim())}
                class:valid={nickUnique && nick !== ''}
                class:invalid={!nickUnique && nick !== ''}
                required>
-
         <label for="isSwimmer">Plavecké dovednosti:</label>
         <select id="isSwimmer" name="je_plavec" bind:value={isSwimmer} required>
             <option value="" disabled selected>Vyberte možnost</option>
@@ -119,7 +117,9 @@
         </select>
 
         <label for="friendNick">Kamarád na lodi (nepovinné):</label>
-        <input type="text" id="friendNick" name="kanoe_kamarad" bind:value={friendNick} class:valid={validateNickname(friendNick) || friendNick === ''} class:invalid={!validateNickname(friendNick) && friendNick !== ''}>
+        <input type="text" id="friendNick" name="kanoe_kamarad" bind:value={friendNick}
+               class:valid={validateNickname(friendNick) || friendNick === ''}
+               class:invalid={!validateNickname(friendNick) && friendNick !== ''}>
 
         <button type="submit">Odeslat</button>
         <button type="button" on:click={() => window.history.back()}>Storno</button>
@@ -130,6 +130,7 @@
     .valid {
         border-color: green;
     }
+
     .invalid {
         border-color: red;
     }

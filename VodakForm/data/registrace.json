@@ -23,5 +23,20 @@
     "nick": "dwlad",
     "isSwimmer": "0",
     "friendNick": "wa"
+  },
+  {
+    "nick": "adwd",
+    "isSwimmer": "1",
+    "friendNick": null
+  },
+  {
+    "nick": "adwad",
+    "isSwimmer": "1",
+    "friendNick": "awwda"
+  },
+  {
+    "nick": "wadl",
+    "isSwimmer": "1",
+    "friendNick": "wdwad"
   }
 ]
