@@ -1,46 +1,89 @@
 
 <script>
+    import { browser } from '$app/environment';
     import { onMount } from 'svelte';
-    let nickname = '';
-    let isUnique = true;
 
-    async function checkNickname() {
-        if (!nickname) {
-            isUnique = true; // No need to check if nickname is empty
+    let nick = '';
+    let isSwimmer = '';
+    let friendNick = '';
+    let nickUnique = true; // Assume nickname is not unique initially
+
+    // Function to validate the nickname
+    function validateNickname(nickname) {
+        const regex = /^[a-zA-Z0-9]{2,20}$/;
+        return regex.test(nickname);
+    }
+
+    // Function to check the nickname's uniqueness via an API call
+    async function checkNicknameUniqueness(nickname) {
+        if (!validateNickname(nickname)) {
+            nickUnique = false;
             return;
         }
-
-        // Call the server to check if the nickname is unique
-        const response = await fetch(`/registrace/nick-check?nick=${encodeURIComponent(nickname)}`);
-        isUnique = response.ok; // if the response is ok, then the nickname is unique
+        try {
+            const response = await fetch(`/registrace/nickname-check?nick=${encodeURIComponent(nickname)}`);
+            nickUnique = response.ok; // If the status is 200, the nickname is unique
+        } catch (error) {
+            console.error('Error checking nickname uniqueness', error);
+        }
     }
 
-    onMount(() => {
-        // Perform any on mount actions if necessary
-    });
+    // Only run the AJAX call if we are in the browser
+    if (browser) {
+        onMount(() => {
+            // Debounce the uniqueness check to avoid too many API calls
+            let timeout;
+            function debouncedCheck() {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => checkNicknameUniqueness(nick), 500);
+            }
+            return debouncedCheck;
+        });
+    }
+
+    // Function to handle the form submission
+    async function submitForm() {
+        if (!validateNickname(nick) || !isSwimmer || !nickUnique) {
+            alert('Please fill in the form correctly.');
+            return false;
+        }
+        // Proceed with form submission logic...
+    }
 </script>
 
-<form on:submit|preventDefault="{checkNickname}">
-    <label for="nick">Přezdívka:</label>
-    <input
-            type="text"
-            id="nick"
-            name="nick"
-            bind:value="{nickname}"
-            on:input="{checkNickname}"
-            class="{isUnique ? '' : 'is-invalid'}"
-    >
-    <span class="invalid-feedback" style="{isUnique ? 'display: none;' : ''}">
-    This nickname is already taken.
-  </span>
-    <button type="submit">Register</button>
-</form>
+<main>
+    <h1>Registrace na vodácký kurz</h1>
+    <form on:submit|preventDefault={submitForm}>
+        <label for="nick">Přezdívka:</label>
+        <input type="text"
+               id="nick"
+               name="nick"
+               bind:value={nick}
+               on:input={() => checkNicknameUniqueness(nick)}
+               class:valid={nickUnique && nick !== ''}
+               class:invalid={!nickUnique && nick !== ''}
+               required>
+
+        <label for="isSwimmer">Plavecké dovednosti:</label>
+        <select id="isSwimmer" name="je_plavec" bind:value={isSwimmer} required>
+            <option value="" disabled selected>Vyberte možnost</option>
+            <option value="1">Ano</option>
+            <option value="0">Ne</option>
+        </select>
+
+        <label for="friendNick">Kamarád na lodi (nepovinné):</label>
+        <input type="text" id="friendNick" name="kanoe_kamarad" bind:value={friendNick} class:valid={validateNickname(friendNick) || friendNick === ''} class:invalid={!validateNickname(friendNick) && friendNick !== ''}>
+
+        <button type="submit">Odeslat</button>
+        <button type="button" on:click={() => window.history.back()}>Storno</button>
+    </form>
+</main>
 
 <style>
-    .is-invalid {
-        border-color: #dc3545;
+    .valid {
+        border-color: green;
     }
-    .invalid-feedback {
-        color: #dc3545;
+    .invalid {
+        border-color: red;
     }
 </style>
