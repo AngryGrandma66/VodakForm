@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "nick": "test",
+    "isSwimmer": "1",
+    "friendNick": "wdad"
+  },
+  {
+    "nick": "asdad",
+    "isSwimmer": "1",
+    "friendNick": "wadawdawddwadwadwadwa"
+  },
+  {
+    "nick": "adwda",
+    "isSwimmer": "1",
+    "friendNick": "aa"
+  },
+  {
+    "nick": "adwadw",
+    "isSwimmer": "1",
+    "friendNick": "dwadwad"
+  },
+  {
+    "nick": "dwlad",
+    "isSwimmer": "0",
+    "friendNick": "wa"
+  }
+]

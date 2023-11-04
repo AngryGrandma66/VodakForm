@@ -51,11 +51,7 @@
                 },
                 body: JSON.stringify(formData)
             });
-
-            if (!response.ok) {
-                throw new Error('Server error');
-            }
-
+            
             return await response.json(); // or handle the response as needed
         } catch (error) {
             console.error('Submission error:', error);
@@ -65,12 +61,23 @@
 
     // Adjusted function to handle the form submission
     async function submitForm() {
-        if (!validateNickname(nick) || !isSwimmer || !nickUnique) {
-            alert('Please fill in the form correctly.');
+        if (!validateNickname(nick)||!(validateNickname(friendNick)||friendNick==="")){
+            alert('Vstupní udáje nejsou validní');
+            return false;
+
+        }
+
+        if (!nickUnique) {
+            alert('Přezdívku už nekdo má.');
             return false;
         }
 
-        // Construct the form data object
+
+        if(!isSwimmer) {
+            alert('Musíte umět plavat');
+            return false;
+        }
+            // Construct the form data object
         const formData = {
             nick,
             isSwimmer,
@@ -80,8 +87,9 @@
         // Submit the form data
         const result = await submitData(formData);
         if (result && result.success) {
-            alert('Registration successful!');
+            alert('Registrace Úspěšná');
             // Optionally reset the form or redirect the user
+            window.history.back()
         } else {
             alert('Registration failed. Please try again.');
         }
