@@ -1,2 +1,12 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    // zde můžete přidat skripty, pokud je to potřeba
+</script>
+
+<main>
+    <h1>Rozsazení v lodích na vodáckém kurzu 2023 SPŠE Ječná</h1>
+    <a href="/registrace">Registrovat se</a>
+</main>
+
+<style>
+    /* zde můžete přidat styly, pokud je to potřeba */
+</style>
