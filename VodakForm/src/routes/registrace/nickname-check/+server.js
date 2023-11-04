@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 // Path to the JSON file
-const dataFilePath = path.resolve('registrace.json');
+const dataFilePath = path.resolve('data/registrace.json');
 
 // Function to read registrations from the JSON file
 async function readRegistrations() {

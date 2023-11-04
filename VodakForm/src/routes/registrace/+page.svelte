@@ -42,11 +42,50 @@
     }
 
     // Function to handle the form submission
+    async function submitData(formData) {
+        try {
+            const response = await fetch('/registrace/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Server error');
+            }
+
+            return await response.json(); // or handle the response as needed
+        } catch (error) {
+            console.error('Submission error:', error);
+            alert('There was an error submitting the form.');
+        }
+    }
+
+    // Adjusted function to handle the form submission
     async function submitForm() {
         if (!validateNickname(nick) || !isSwimmer || !nickUnique) {
             alert('Please fill in the form correctly.');
             return false;
         }
+
+        // Construct the form data object
+        const formData = {
+            nick,
+            isSwimmer,
+            friendNick: friendNick || null  // Optional field
+        };
+
+        // Submit the form data
+        const result = await submitData(formData);
+        if (result && result.success) {
+            alert('Registration successful!');
+            // Optionally reset the form or redirect the user
+        } else {
+            alert('Registration failed. Please try again.');
+        }
+
         // Proceed with form submission logic...
     }
 </script>
