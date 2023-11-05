@@ -11,6 +11,7 @@ async function readRegistrations() {
         const data = await fs.readFile(dataFilePath, 'utf8');
         return JSON.parse(data);
     } catch (err) {
+        // @ts-ignore
         if (err.code === 'ENOENT') {
             // If the file does not exist, return an empty array
             await fs.writeFile(dataFilePath, JSON.stringify([]));
@@ -22,9 +23,12 @@ async function readRegistrations() {
 }
 
 // Function to check if a username is unique
+/**
+ * @param {any} username
+ */
 async function isusernameUnique(username) {
     const registrations = await readRegistrations();
-    return !registrations.some(reg => reg.username === username);
+    return !registrations.some((/** @type {{ username: any; }} */ reg) => reg.username === username);
 }
 
 // Endpoint to check the username uniqueness

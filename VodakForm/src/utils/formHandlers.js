@@ -14,6 +14,9 @@ import {validateUsername,validateEmail, validatePassword} from "./validation.js"
 
 
 // Function to check the username's uniqueness via an API call
+/**
+ * @param {string} username
+ */
 export async function checkUsernameUniqueness(username) {
     if (!validateUsername(username)) {
         usernameUnique.set(false);
@@ -30,6 +33,10 @@ export async function checkUsernameUniqueness(username) {
     // Only run the AJAX call if we are in the browser
 }
 // Function to handle the form submission
+/**
+ * @param {{ username: string; isSwimmer: string; sClass: string; email: string; password: string; friendNick: string | null; // Optional field
+ }} formData
+ */
 async function submitData(formData) {
     try {
         const response = await fetch('/registrace/submit', {

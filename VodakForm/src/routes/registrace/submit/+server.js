@@ -7,6 +7,9 @@ import argon2 from "argon2";
 
 // Function to read and write registrations
 
+/**
+ * @param {{ password: string | Buffer; }} newRegistration
+ */
 async function updateRegistrations(newRegistration) {
 
     const dataFilePath = path.resolve('data/registrace.json');
@@ -44,6 +47,7 @@ export async function POST({ request }) {
 
     } catch (err) {
         console.error('Server error during POST:', err);
+        // @ts-ignore
         return new Response(JSON.stringify({ success: false, message: err.message }), {
             status: 500,
             headers: {

@@ -9,6 +9,9 @@
 
     onMount(() => {
         // Debounce the uniqueness check to avoid too many API calls
+        /**
+		 * @type {number | undefined}
+		 */
         let timeout;
 
         function debouncedCheck() {
