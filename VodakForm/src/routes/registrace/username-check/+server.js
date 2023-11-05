@@ -21,18 +21,19 @@ async function readRegistrations() {
     }
 }
 
-// Function to check if a nickname is unique
-async function isNicknameUnique(nickname) {
+// Function to check if a username is unique
+async function isusernameUnique(username) {
     const registrations = await readRegistrations();
-    return !registrations.some(reg => reg.nick === nickname);
+    return !registrations.some(reg => reg.username === username);
 }
 
-// Endpoint to check the nickname uniqueness
+// Endpoint to check the username uniqueness
 export async function GET({ url }) {
-    const nickname = url.searchParams.get('nick');
-    if (!nickname) {
+    const username = url.searchParams.get('username');
+    if (!username) {
         return new Response(null, { status: 400 });
     }
-    const unique = await isNicknameUnique(nickname);
+    console.log(username)
+    const unique = await isusernameUnique(username);
     return new Response(unique ? 'Unique' : 'Duplicate', { status: unique ? 200 : 409 });
 }

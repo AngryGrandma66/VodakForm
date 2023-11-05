@@ -1,125 +1,99 @@
 <script>
-    import {browser} from '$app/environment';
-    import {onMount} from 'svelte';
+    import { username, isSwimmer, friendNick, sClass, usernameUnique, email, password, confPassword } from '../../stores.js'
+    import { validatePassword, validateUsername, validateEmail, validateSClass } from "../../utils/validation.js"
+    import { checkUsernameUniqueness, submitForm } from '../../utils/formHandlers.js';
+    import { onMount } from 'svelte';
+    import {get} from "svelte/store";
 
-    let nick = '';
-    let isSwimmer = '';
-    let friendNick = '';
-    let nickUnique = true; // Assume nickname is not unique initially
+    // ... other script logic
 
-    // Function to validate the nickname
-    function validateNickname(nickname) {
-        const regex = /^[a-zA-Z0-9]{2,20}$/;
-        return regex.test(nickname);
-    }
+    onMount(() => {
+        // Debounce the uniqueness check to avoid too many API calls
+        let timeout;
 
-    // Function to check the nickname's uniqueness via an API call
-    async function checkNicknameUniqueness(nickname) {
-        if (!validateNickname(nickname)) {
-            nickUnique = false;
-            return;
-        }
-        try {
-            const response = await fetch(`/registrace/nickname-check?nick=${encodeURIComponent(nickname)}`);
-            nickUnique = response.ok; // If the status is 200, the nickname is unique
-        } catch (error) {
-            console.error('Error checking nickname uniqueness', error);
-        }
-    }
-
-    // Only run the AJAX call if we are in the browser
-    if (browser) {
-        onMount(() => {
-            // Debounce the uniqueness check to avoid too many API calls
-            let timeout;
-
-            function debouncedCheck() {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => checkNicknameUniqueness(nick), 500);
-            }
-
-            return debouncedCheck;
-        });
-    }
-
-    // Function to handle the form submission
-    async function submitData(formData) {
-        try {
-            const response = await fetch('/registrace/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            return await response.json(); // or handle the response as needed
-        } catch (error) {
-            console.error('Submission error:', error);
-            alert('Došlo k chybě.');
-        }
-    }
-
-    // Adjusted function to handle the form submission
-    async function submitForm() {
-        if (!validateNickname(nick) || !(validateNickname(friendNick) || friendNick === "")) {
-            alert('Vstupní udáje nejsou validní');
-            return false;
-
+        function debouncedCheck() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => checkUsernameUniqueness(get(username)), 500);
         }
 
-        if (!nickUnique) {
-            alert('Přezdívku už nekdo má.');
-            return false;
-        }
+        return debouncedCheck;
+    });
 
 
-        if (!isSwimmer) {
-            alert('Musíte umět plavat');
-            return false;
-        }
-        // Construct the form data object
-        const formData = {
-            nick: nick.toLowerCase().trim(),
-            isSwimmer,
-            friendNick: friendNick.toLowerCase().trim() || null  // Optional field
-        };
-
-        // Submit the form data
-        const result = await submitData(formData);
-        if (result && result.success) {
-            alert('Registrace Úspěšná');
-            // Optionally reset the form or redirect the user
-            window.history.back()
-        } else {
-            alert('Registrace se nepovedla. Prosím zkuste znovu');
-        }
-    }
 </script>
-
 <main>
     <h1>Registrace na vodácký kurz</h1>
     <form on:submit|preventDefault={submitForm}>
-        <label for="nick">Přezdívka:</label>
+
+        <label for="username">Přezdívka:</label>
         <input type="text"
-               id="nick"
-               name="nick"
-               bind:value={nick}
-               on:input={() => checkNicknameUniqueness(nick.toLowerCase().trim())}
-               class:valid={nickUnique && nick !== ''}
-               class:invalid={!nickUnique && nick !== ''}
-               required>
+               id="username"
+               name="username"
+               bind:value={$username}
+               on:input={() => checkUsernameUniqueness($username)}
+               class:valid={$usernameUnique && $username!==$friendNick }
+               class:invalid={!usernameUnique||$username===$friendNick && $username!==''}
+               required
+               maxlength="20">
+
         <label for="isSwimmer">Plavecké dovednosti:</label>
-        <select id="isSwimmer" name="je_plavec" bind:value={isSwimmer} required>
+        <select id="isSwimmer" name="je_plavec" bind:value={$isSwimmer} required>
             <option value="" disabled selected>Vyberte možnost</option>
             <option value="1">Ano</option>
             <option value="0">Ne</option>
         </select>
 
+        <label for="sClass">Třída:</label>
+        <input type="text"
+               id="sClass"
+               name="sClass"
+               bind:value={$sClass}
+               class:valid={$sClass!==''&&validateSClass($sClass)}
+               class:invalid={$sClass!==''&&!validateSClass($sClass)}
+               required
+               pattern="^[aceACE][1234][abcABC]$"
+               maxlength="3">
+
+        <label for="email">email:</label>
+        <input type="text"
+               id="email"
+               name="email"
+               bind:value={$email}
+               class:valid={validateEmail($email)}
+               class:invalid={!validateEmail($email)&& $email!==''}
+               required
+               maxlength="320">
+
         <label for="friendNick">Kamarád na lodi (nepovinné):</label>
-        <input type="text" id="friendNick" name="kanoe_kamarad" bind:value={friendNick}
-               class:valid={validateNickname(friendNick) || friendNick === ''}
-               class:invalid={!validateNickname(friendNick) && friendNick !== ''}>
+        <input type="text"
+               id="friendNick"
+               name="kanoe_kamarad"
+               bind:value={$friendNick}
+               class:valid={validateUsername($friendNick) || $friendNick === ''}
+               class:invalid={(!validateUsername($friendNick) ||$username===$friendNick) && $friendNick!==''}
+               maxlength="20">
+
+        <label for="password">Heslo:</label>
+        <input type="password"
+               id="password"
+               name="password"
+               bind:value={$password}
+               class:valid={validatePassword($password) && $confPassword===$password }
+               class:invalid={(!validatePassword($password) ||$confPassword!==$password) && $password!==''}
+               maxlength="64"
+               minlength="8"
+               required>
+
+        <label for="confPassword">Podtvrzení hesla:</label>
+        <input type="password"
+               id="confPassword"
+               name="confPassword"
+               bind:value={$confPassword}
+               class:valid={validatePassword($confPassword) && $confPassword===$password }
+               class:invalid={(!validatePassword($confPassword) ||$confPassword!==$password) && $confPassword!==''}
+               maxlength="64"
+               minlength="8"
+               required>
 
         <button type="submit">Odeslat</button>
         <button type="button" on:click={() => window.history.back()}>Storno</button>

@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import fs from 'fs/promises';
 import path from 'path';
+import argon2 from "argon2";
 
 
 
@@ -9,7 +10,10 @@ import path from 'path';
 async function updateRegistrations(newRegistration) {
 
     const dataFilePath = path.resolve('data/registrace.json');
-    try {
+    try{
+
+        newRegistration.password = await argon2.hash(newRegistration.password)
+
         const data = await fs.readFile(dataFilePath, 'utf8');
         const registrations = JSON.parse(data);
         registrations.push(newRegistration);

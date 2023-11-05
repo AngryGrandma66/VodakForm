@@ -24,5 +24,9 @@
 		"typescript": "^5.0.0",
 		"vite": "^4.4.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"argon2": "^0.31.2",
+		"js-sha256": "^0.10.1"
+	}
 }
