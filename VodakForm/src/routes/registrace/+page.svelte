@@ -5,7 +5,6 @@
     import { onMount } from 'svelte';
     import {get} from "svelte/store";
 
-    // ... other script logic
 
     onMount(() => {
         // Debounce the uniqueness check to avoid too many API calls
