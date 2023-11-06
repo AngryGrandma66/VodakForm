@@ -34,7 +34,7 @@
                bind:value={$username}
                on:input={() => checkUsernameUniqueness($username)}
                class:valid={$usernameUnique && $username!==$friendNick }
-               class:invalid={!usernameUnique||$username===$friendNick && $username!==''}
+               class:invalid={!$usernameUnique||($username===$friendNick && $username!=='')}
                required
                maxlength="20">
 
