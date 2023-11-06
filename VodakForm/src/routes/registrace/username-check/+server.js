@@ -26,7 +26,7 @@ async function readRegistrations() {
 /**
  * @param {any} username
  */
-async function isusernameUnique(username) {
+async function isUsernameUnique(username) {
     const registrations = await readRegistrations();
     return !registrations.some((/** @type {{ username: any; }} */ reg) => reg.username === username);
 }
@@ -38,6 +38,6 @@ export async function GET({ url }) {
         return new Response(null, { status: 400 });
     }
     console.log(username)
-    const unique = await isusernameUnique(username);
+    const unique = await isUsernameUnique(username);
     return new Response(unique ? 'Unique' : 'Duplicate', { status: unique ? 200 : 409 });
 }
