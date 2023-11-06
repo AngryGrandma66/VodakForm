@@ -26,7 +26,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"argon2": "^0.31.2",
-		"js-sha256": "^0.10.1"
+		"argon2": "^0.31.2"
 	}
 }
