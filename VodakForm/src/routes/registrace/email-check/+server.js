@@ -1,5 +1,4 @@
-import {readRegistrations} from '../username-check/+server.js'
-
+import { readRegistrations } from '$lib/fileRead.js'
 async function isEmailUnique(email) {
     const registrations = await readRegistrations();
     return !registrations.some(reg => reg.email === email);

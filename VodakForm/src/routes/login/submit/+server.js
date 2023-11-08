@@ -1,17 +1,12 @@
 import { error } from '@sveltejs/kit';
-import fs from 'fs/promises';
-import path from 'path';
 import argon2 from "argon2";
 import { serialize } from 'cookie';
-
 import { createSession } from '$lib/sessionStore';
+import { readRegistrations } from '$lib/fileRead.js'
 
-
-async function findUser(filePath, searchValue) {
+async function findUser(searchValue) {
     try {
-        const jsonString = await fs.readFile(filePath, 'utf8');
-        const usersArray = JSON.parse(jsonString);
-
+        const usersArray = readRegistrations()
         return usersArray.find(user => user.username === searchValue);
     } catch (err) {
         console.error('Error processing login:', err);
@@ -22,8 +17,7 @@ async function findUser(filePath, searchValue) {
 
 
 async function authenticateUser(formData) {
-    const dataFilePath = path.resolve('data/registrace.json');
-    const user = await findUser(dataFilePath, formData.loginUsername); // make sure the name of the form field matches
+    const user = await findUser(formData.loginUsername); // make sure the name of the form field matches
     if (!user) {
         console.log('User not found');
         return null; // Return null instead of false to indicate no user found
