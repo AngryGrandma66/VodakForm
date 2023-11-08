@@ -1,19 +1,24 @@
 import { get } from 'svelte/store';
-
-
-import {
-    username,
-    isSwimmer,
-    friendNick,
-    sClass,
-    usernameUnique,
-    email,
-    password,
-    confPassword} from '../stores.js'
+import {username, isSwimmer, friendNick, sClass, usernameUnique, email, password, confPassword, emailUnique} from '../stores.js'
 import {validateUsername,validateEmail, validatePassword} from "./validation.js";
 
 
-// Function to check the username's uniqueness via an API call
+
+export async function checkEmailUniqueness(email) {
+    if (!validateEmail(email)) {
+        emailUnique.set(false);
+        return;
+    }
+    try {
+        const response = await fetch(`/registrace/email-check?email=${encodeURIComponent(email.toLowerCase().trim())}`);
+        emailUnique.set(response.ok); // If the status is 200, the email is unique
+    } catch (error) {
+        console.error('Error checking email uniqueness', error);
+    }
+}
+
+
+
 /**
  * @param {string} username
  */

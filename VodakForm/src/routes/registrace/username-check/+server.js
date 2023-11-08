@@ -6,7 +6,7 @@ import path from 'path';
 const dataFilePath = path.resolve('data/registrace.json');
 
 // Function to read registrations from the JSON file
-async function readRegistrations() {
+export async function readRegistrations() {
     try {
         const data = await fs.readFile(dataFilePath, 'utf8');
         return JSON.parse(data);

@@ -1,16 +1,22 @@
-// src/hooks.server.js
-import { parse } from 'cookie';
-// src/hooks.server.js
 import { getSession } from '$lib/sessionStore';
 
 export async function handle({ event, resolve }) {
     const cookies = event.request.headers.get('cookie') || '';
     const sessionId = parseCookie(cookies, 'session_id');
-    event.locals.user = await getSession(sessionId);
+    const userSession = await getSession(sessionId);
+
+    if (userSession) {
+        event.locals.user = userSession.userId;
+    } else {
+        event.locals.user = null;
+    }
 
     return resolve(event);
 }
 
 function parseCookie(cookieHeader, name) {
-    // Parse the Cookie header to find the session_id cookie
+    const value = `; ${cookieHeader}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
 }

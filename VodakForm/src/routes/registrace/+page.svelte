@@ -1,7 +1,7 @@
 <script>
-    import { username, isSwimmer, friendNick, sClass, usernameUnique, email, password, confPassword } from '../../stores.js'
+    import { username, isSwimmer, friendNick, sClass, usernameUnique,emailUnique, email, password, confPassword } from '../../stores.js'
     import { validatePassword, validateUsername, validateEmail, validateSClass } from "../../utils/validation.js"
-    import { checkUsernameUniqueness, regSubmitForm } from '../../utils/regFormHandlers.js';
+    import { checkEmailUniqueness, checkUsernameUniqueness, regSubmitForm } from '../../utils/regFormHandlers.js';
     import { onMount } from 'svelte';
     import {get} from "svelte/store";
 
@@ -17,8 +17,19 @@
             clearTimeout(timeout);
             timeout = setTimeout(() => checkUsernameUniqueness(get(username)), 500);
         }
+        /**
+         * @type {number | undefined}
+         */
+        let emailTimeout;
+        function debouncedEmailCheck() {
+            clearTimeout(emailTimeout);
+            emailTimeout = setTimeout(() => checkEmailUniqueness(get(email)), 500);
+        }
 
-        return debouncedCheck;
+        return () => {
+            debouncedCheck();
+            debouncedEmailCheck();
+        };
     });
 
 
@@ -61,8 +72,8 @@
                id="email"
                name="email"
                bind:value={$email}
-               class:valid={validateEmail($email)}
-               class:invalid={!validateEmail($email)&& $email!==''}
+               class:valid={$emailUnique &&validateEmail($email)}
+               class:invalid={!$emailUnique || !validateEmail($email)&& $email!==''}
                required
                maxlength="320">
 
