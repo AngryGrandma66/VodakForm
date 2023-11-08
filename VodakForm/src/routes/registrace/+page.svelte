@@ -72,8 +72,9 @@
                id="email"
                name="email"
                bind:value={$email}
+               on:input={() => checkEmailUniqueness($email)}
                class:valid={$emailUnique &&validateEmail($email)}
-               class:invalid={!$emailUnique || !validateEmail($email)&& $email!==''}
+               class:invalid={(!$emailUnique || !validateEmail($email))&& $email!==''}
                required
                maxlength="320">
 

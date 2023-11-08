@@ -69,6 +69,8 @@ export async function regSubmitForm() {
     const currentIsSwimmer = get(isSwimmer);
     const currentSClass = get(sClass);
     const currentUsernameUnique = get(usernameUnique);
+    const currentEmailUnique = get(emailUnique);
+
 
     if (!validateUsername(currentUsername) || !(validateUsername(currentFriendNick) || currentFriendNick === '')) {
         alert('Vstupní udáje nejsou validní');
@@ -86,7 +88,10 @@ export async function regSubmitForm() {
     if (!validateEmail(currentEmail)) {
         alert("Email není validní")
     }
-
+    if (!currentEmailUnique) {
+        alert('Email už nekdo má.');
+        return false;
+    }
     if (!currentIsSwimmer) {
         alert('Musíte umět plavat');
         return false;
