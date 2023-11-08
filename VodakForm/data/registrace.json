@@ -86,5 +86,13 @@
     "email": "awda@adwdw.cz",
     "password": "$argon2id$v=19$m=65536,t=3,p=4$ybstAGXCtQLYjF7gkC/UCQ$tIjTtTw7kRseMXh779dozdBfo2yQRZ5Oug9Uhm3sFzY",
     "friendNick": null
+  },
+  {
+    "username": "test1",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "awda@adwdw.cze",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$3iHOk9WNHmVtOnqEdTEFlw$4xIIQ5WkdkJKkZn5eiCPla7tftJi8/I5f4WxBHLtROI",
+    "friendNick": "dqqd"
   }
 ]

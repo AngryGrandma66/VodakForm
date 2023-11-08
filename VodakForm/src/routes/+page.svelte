@@ -1,4 +1,6 @@
 <script>
+    export let data;
+
     async function handleLogout() {
         // Make a GET request to the logout endpoint
         const response = await fetch('/logout', {
@@ -13,14 +15,25 @@
             // Handle errors, e.g., show an error message
             console.error('Logout failed');
         }
-    }</script>
+    }
+    async function redirectToBoats(){
+            if (data.props.userId===null){
+                window.location.href = '/login';            }
+            else{
+                console.log(data.props.userId);
+                window.location.href = `/user/${data.props.userId}`;
+            }
+    }
+</script>
 
 <main>
     <h1>Rozsazení v lodích na vodáckém kurzu 2023 SPŠE Ječná</h1>
     <a href="/registrace">Registrovat se</a>
     <a href="/login">Přihlásit se</a>
+    <button on:click={handleLogout}>Odhlásit se</button>
+    <button on:click={redirectToBoats}>Loďe</button>
 
-    <button on:click={handleLogout}>Odhlásit se</button></main>
+</main>
 
 <style>
     /* zde můžete přidat styly, pokud je to potřeba */

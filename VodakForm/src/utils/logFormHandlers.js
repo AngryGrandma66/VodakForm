@@ -29,10 +29,11 @@ export async function logSubmitForm() {
     };
     // Submit the form data
     const result = await submitData(formData);
-    if (result && result.success) {
+
+    if (result?.success) {
         alert('Login byl úspěšný');
         // Optionally reset the form or redirect the user
-        window.history.back()
+        window.location.href = '/'
     } else {
         alert('Jméno nebo heslo není správně');
     }

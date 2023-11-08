@@ -1,15 +1,26 @@
 import fs from 'fs/promises';
 import path from 'path';
+import crypto from 'crypto'; // Make sure to import the crypto module
 
 const SESSIONS_FILE_PATH = path.resolve('data/sessions.json');
 
 async function readSessions() {
-    const data = await fs.readFile(SESSIONS_FILE_PATH, 'utf-8');
-    return JSON.parse(data);
+    try {
+        const data = await fs.readFile(SESSIONS_FILE_PATH, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        // Handle error (e.g., if the file doesn't exist, return an initial structure)
+        console.error('Failed to read sessions:', error);
+        return { sessions: [] };
+    }
 }
-
 async function writeSessions(sessions) {
-    await fs.writeFile(SESSIONS_FILE_PATH, JSON.stringify(sessions, null, 2), 'utf-8');
+    try {
+        await fs.writeFile(SESSIONS_FILE_PATH, JSON.stringify(sessions, null, 2), 'utf-8');
+    } catch (error) {
+        // Handle error
+        console.error('Failed to write sessions:', error);
+    }
 }
 
 export async function createSession(userId) {

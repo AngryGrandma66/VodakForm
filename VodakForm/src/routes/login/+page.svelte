@@ -29,7 +29,7 @@
            minlength="8"
            required>
     <button type="submit">Odeslat</button>
-    <button type="button" on:click={() => window.history.back()}>Storno</button>
+    <button type="button" on:click={() => window.location.href = '/'}>Storno</button>
     </form>
 
 </main>

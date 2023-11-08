@@ -19,10 +19,8 @@ async function findUser(searchValue) {
 async function authenticateUser(formData) {
     const user = await findUser(formData.loginUsername); // make sure the name of the form field matches
     if (!user) {
-        console.log('User not found');
         return null; // Return null instead of false to indicate no user found
     }
-    console.log()
     const passwordMatches = await argon2.verify(user.password, formData.loginPassword);
 
     return passwordMatches ? user : null;

@@ -3,14 +3,14 @@ import {getSession, validateSession} from '$lib/sessionStore';
 export async function handle({ event, resolve }) {
     const cookies = event.request.headers.get('cookie') || '';
     const sessionId = parseCookie(cookies, 'session_id');
-    const userSession = await getSession(sessionId);
 
-    if (userSession && validateSession(userSession)) {
-        event.locals.user = userSession.userId;
-    } else {
-        event.locals.user = null;
+    if (sessionId) {
+        const userSession = await getSession(sessionId);
+        if (validateSession(userSession)) {
+            event.locals.user = userSession; // Store the entire session object
+        }
     }
-
+    // If the session is not valid, `event.locals.user` will be undefined
     return resolve(event);
 }
 
