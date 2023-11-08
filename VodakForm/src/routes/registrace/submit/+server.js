@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import fs from 'fs/promises';
-import path from 'path';
 import argon2 from "argon2";
+import {dataFilePath, readRegistrations} from "$lib/fileRead.js";
 
 
 
@@ -13,7 +13,6 @@ import argon2 from "argon2";
  *  */
 async function updateRegistrations(newRegistration) {
 
-    const dataFilePath = path.resolve('data/registrace.json');
     try{
         newRegistration.username = newRegistration.username.toLowerCase().trim()
         newRegistration.sClass = newRegistration.sClass.toLowerCase()
@@ -21,9 +20,7 @@ async function updateRegistrations(newRegistration) {
         newRegistration.password = await argon2.hash(newRegistration.password)
         newRegistration.friendNick=newRegistration.friendNick!==null?newRegistration.friendNick.toLowerCase().trim():null
 
-
-        const data = await fs.readFile(dataFilePath, 'utf8');
-        const registrations = JSON.parse(data);
+        const registrations =await readRegistrations()
         registrations.push(newRegistration);
         await fs.writeFile(dataFilePath, JSON.stringify(registrations, null, 2));
         return { success: true };
@@ -34,11 +31,6 @@ async function updateRegistrations(newRegistration) {
     }
 
 }
-
-
-
-// Endpoint to handle the form submission
-
 export async function POST({ request }) {
     try {
         const formData = await request.json();

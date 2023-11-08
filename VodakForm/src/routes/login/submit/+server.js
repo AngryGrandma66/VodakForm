@@ -6,7 +6,7 @@ import { readRegistrations } from '$lib/fileRead.js'
 
 async function findUser(searchValue) {
     try {
-        const usersArray = readRegistrations()
+        const usersArray = await readRegistrations()
         return usersArray.find(user => user.username === searchValue);
     } catch (err) {
         console.error('Error processing login:', err);

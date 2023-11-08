@@ -15,7 +15,16 @@ async function writeSessions(sessions) {
 export async function createSession(userId) {
     const sessions = await readSessions();
     const sessionId = crypto.randomUUID();
-    const sessionData = { sessionId, userId, createdAt: new Date().toISOString() };
+    const sessionExpiry = new Date();
+
+    sessionExpiry.setDate(sessionExpiry.getDate() + 1);
+
+    const sessionData = {
+        sessionId,
+        userId,
+        createdAt: new Date().toISOString(),
+        expiresAt: sessionExpiry.toISOString() // Add the expiresAt field
+    };
     sessions.sessions.push(sessionData);
     await writeSessions(sessions);
     return sessionId;
@@ -35,7 +44,9 @@ export async function endSession(sessionId) {
     }
 }
 
-function validateSession(session) {
-    // Add your validation logic here (e.g., check for expiration)
-    return true;
+export function validateSession(session) {
+    const now = new Date();
+    const expiresAt = new Date(session.expiresAt);
+    return now < expiresAt;
 }
+

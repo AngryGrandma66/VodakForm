@@ -34,7 +34,7 @@ export async function logSubmitForm() {
         // Optionally reset the form or redirect the user
         window.history.back()
     } else {
-        alert('Login se nepovedl. Prosím zkuste znovu');
+        alert('Jméno nebo heslo není správně');
     }
 }
 
