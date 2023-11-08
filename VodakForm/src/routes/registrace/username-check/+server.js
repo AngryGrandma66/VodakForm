@@ -37,7 +37,6 @@ export async function GET({ url }) {
     if (!username) {
         return new Response(null, { status: 400 });
     }
-    console.log(username)
     const unique = await isUsernameUnique(username);
     return new Response(unique ? 'Unique' : 'Duplicate', { status: unique ? 200 : 409 });
 }

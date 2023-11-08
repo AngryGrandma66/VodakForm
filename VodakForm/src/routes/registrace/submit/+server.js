@@ -8,14 +8,19 @@ import argon2 from "argon2";
 // Function to read and write registrations
 
 /**
- * @param {{ password: string | Buffer; }} newRegistration
- */
+ * @param {{ username: string; isSwimmer: string; sClass: string; email: string; password: string | Buffer; friendNick: string | null; // Optional field
+ *  }}  newRegistration
+ *  */
 async function updateRegistrations(newRegistration) {
 
     const dataFilePath = path.resolve('data/registrace.json');
     try{
-
+        newRegistration.username = newRegistration.username.toLowerCase().trim()
+        newRegistration.sClass = newRegistration.sClass.toLowerCase()
+        newRegistration.email = newRegistration.email.trim().toLowerCase()
         newRegistration.password = await argon2.hash(newRegistration.password)
+        newRegistration.friendNick=newRegistration.friendNick!==null?newRegistration.friendNick.toLowerCase().trim():null
+
 
         const data = await fs.readFile(dataFilePath, 'utf8');
         const registrations = JSON.parse(data);

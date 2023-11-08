@@ -23,7 +23,7 @@ export async function checkUsernameUniqueness(username) {
         return;
     }
     try {
-        const response = await fetch(`/registrace/username-check?username=${encodeURIComponent(username)}`);
+        const response = await fetch(`/registrace/username-check?username=${encodeURIComponent(username.toLowerCase().trim())}`);
         usernameUnique.set(response.ok); // If the status is 200, the username is unique
     } catch (error) {
         console.error('Error checking username uniqueness', error);
@@ -55,7 +55,7 @@ async function submitData(formData) {
 }
 
 // Adjusted function to handle the form submission
-export async function submitForm() {
+export async function regSubmitForm() {
     const currentUsername = get(username);
     const currentFriendNick = get(friendNick);
     const currentEmail = get(email);

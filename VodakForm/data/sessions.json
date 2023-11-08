@@ -1,0 +1,24 @@
+{
+  "sessions": [
+    {
+      "sessionId": "e273be9d-1c0c-4d76-8f24-545fc566da50",
+      "userId": "test156",
+      "createdAt": "2023-11-08T11:29:48.604Z"
+    },
+    {
+      "sessionId": "f7ac6ddd-188f-4ade-b58d-9fc534dd98df",
+      "userId": "test156",
+      "createdAt": "2023-11-08T11:49:06.742Z"
+    },
+    {
+      "sessionId": "d9bc41fc-7d4c-4184-93a9-55799615b450",
+      "userId": "test156",
+      "createdAt": "2023-11-08T11:53:50.716Z"
+    },
+    {
+      "sessionId": "2e5d2a1a-80c7-4406-a789-e752a513edd9",
+      "userId": "test156",
+      "createdAt": "2023-11-08T11:54:31.689Z"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 <script>
     import { username, isSwimmer, friendNick, sClass, usernameUnique, email, password, confPassword } from '../../stores.js'
     import { validatePassword, validateUsername, validateEmail, validateSClass } from "../../utils/validation.js"
-    import { checkUsernameUniqueness, submitForm } from '../../utils/formHandlers.js';
+    import { checkUsernameUniqueness, regSubmitForm } from '../../utils/regFormHandlers.js';
     import { onMount } from 'svelte';
     import {get} from "svelte/store";
 
@@ -25,7 +25,7 @@
 </script>
 <main>
     <h1>Registrace na vodácký kurz</h1>
-    <form on:submit|preventDefault={submitForm}>
+    <form on:submit|preventDefault={regSubmitForm}>
 
         <label for="username">Přezdívka:</label>
         <input type="text"
@@ -80,8 +80,8 @@
                id="password"
                name="password"
                bind:value={$password}
-               class:valid={validatePassword($password) && $confPassword===$password }
-               class:invalid={(!validatePassword($password) ||$confPassword!==$password) && $password!==''}
+               class:valid={validatePassword($password) && ($confPassword===$password ||$confPassword==='')  }
+               class:invalid={(!validatePassword($password) ||($confPassword!==$password&&$confPassword!=='')) && $password!==''}
                maxlength="64"
                minlength="8"
                required>

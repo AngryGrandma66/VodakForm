@@ -7,3 +7,5 @@ export let usernameUnique =  writable(true);
 export let email =  writable('');
 export let password =  writable('');
 export let confPassword =  writable('');
+export let loginUsername = writable('')
+export let loginPassword = writable('')

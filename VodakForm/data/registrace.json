@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "username": "awdwa",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "awda@adwdw.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$RidL0LeQycCdcaUQ2EFWHQ$TaMYsfm8hQrwBMYMV1o87fXd8enkjTGzSrVXrS2Phnw",
+    "friendNick": null
+  },
+  {
+    "username": "awdwadd",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "awda@adwdw.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$bydZ2YRZIyYY9K+SSGUZmQ$MaPk+SHZY/bE+cLbJV7QcgrAR5lCKjdxvOvmnt+spbA",
+    "friendNick": null
+  },
+  {
+    "username": "test",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "wdwad@sewa.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$qx6xZBB/tOiRs+TkiRwULw$S1JN+1NTPh4tKLtto3y7WjIze+u6rSDmKww4EfPFH9E",
+    "friendNick": null
+  },
+  {
+    "username": "test42",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "awda@adwdw.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$MnKP4L9YEuo3buC+lVCYOQ$uFftegFK6EWQZ4wWYoE7UX8btAcA6AqXfYp3IwIzgbc",
+    "friendNick": null
+  },
+  {
+    "username": "awddwwdwa",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "awda@adwdw.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$bVyUF+MbKRZS0u+NJrYbnQ$EENjqXAnnvoEsf1rPe9Yqf3ElQ0/kaWgZM5RzmbV9dk",
+    "friendNick": null
+  },
+  {
+    "username": "awddwwdwawa",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "awda@adwdw.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$hrd2EiFdD50KMNb8PwJEag$WX1y8PkoC7EhGkc3JwyFbkLay46jwCNq6XlEIVihTfk",
+    "friendNick": null
+  },
+  {
+    "username": "awdwawdw",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "wdwad@sewa.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$mrtxfdY24E7t0RKixKvG0g$qQ1FityOnr7xbJj1Jp3WBllMJh0tC3yox+XczyaB76M",
+    "friendNick": null
+  },
+  {
+    "username": "awdwawdwww",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "wdwad@sewa.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$OOkwFzTHKGZsEhmfskyRSA$P5t6s+n0aHLMDnyXZllG3dbzHzhkC3zalVK4/tiXd7Y",
+    "friendNick": null
+  },
+  {
+    "username": "test153",
+    "isSwimmer": "1",
+    "sClass": "a2b",
+    "email": "awda@adwdw.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$w8wWx+KHiRQEyHy6t1bBYg$ORHnoNZI3om+ZXC4uAAupUzrpO4O8UGrWtcXAKS0oXw",
+    "friendNick": null
+  },
+  {
+    "username": "test156",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "awda@adwdw.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$/NuLPxnCfk9oEzmk002FXw$5pQMMSOI2SHHBKWTrx/u52Wio2d3RZ6Ga+c4+rZO/v0",
+    "friendNick": null
+  }
+]
