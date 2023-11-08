@@ -38,8 +38,7 @@ export async function POST({ request }) {
     try {
         const formData = await request.json();
         const user = await authenticateUser(formData);
-console.log(user)
-        if (!user) {
+            if (!user) {
             // User not found or password doesn't match
             return new Response(JSON.stringify({ success: false, message: 'Invalid username or password' }), {
                 status: 401,

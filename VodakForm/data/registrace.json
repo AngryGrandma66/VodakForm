@@ -78,5 +78,13 @@
     "email": "awda@adwdw.cz",
     "password": "$argon2id$v=19$m=65536,t=3,p=4$/NuLPxnCfk9oEzmk002FXw$5pQMMSOI2SHHBKWTrx/u52Wio2d3RZ6Ga+c4+rZO/v0",
     "friendNick": null
+  },
+  {
+    "username": "dqqd",
+    "isSwimmer": "1",
+    "sClass": "c4c",
+    "email": "awda@adwdw.cz",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$ybstAGXCtQLYjF7gkC/UCQ$tIjTtTw7kRseMXh779dozdBfo2yQRZ5Oug9Uhm3sFzY",
+    "friendNick": null
   }
 ]
