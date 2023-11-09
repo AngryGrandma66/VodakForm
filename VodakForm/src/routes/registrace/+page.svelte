@@ -53,8 +53,8 @@
         <label for="isSwimmer">Plavecké dovednosti:</label>
         <select id="isSwimmer" name="je_plavec" bind:value={$isSwimmer} required>
             <option value="" disabled selected>Vyberte možnost</option>
-            <option value="1">Ano</option>
-            <option value="0">Ne</option>
+            <option value="true">Ano</option>
+            <option value=''>Ne</option>
         </select>
 
         <label for="sClass">Třída:</label>
