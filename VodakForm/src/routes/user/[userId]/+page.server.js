@@ -50,7 +50,14 @@ async function fetchInvitations(userId) {
 
         // Exclude any invitations where a boat already exists.
         const boats = await readBoats();
-        return invitations.filter(invitation => !boats.some(boat => (boat.nick1 === invitation.username && boat.nick2 === userId) || (boat.nick2 === invitation.username && boat.nick1 === userId)));
+        return invitations.filter(invitation =>
+            !boats.some(boat =>
+                boat.nick1 === userId ||
+                boat.nick2 === userId ||
+                boat.nick1 === invitation.username ||
+                boat.nick2 === invitation.username
+            )
+        );
     } catch (err) {
         console.error('Error fetching invitations:', err);
         throw error(500, 'Error fetching invitations');

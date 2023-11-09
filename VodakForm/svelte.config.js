@@ -1,11 +1,15 @@
 import adapter from '@sveltejs/adapter-node';
-import dotenv from 'dotenv';
 
-if (process.env.NODE_ENV !== 'production') {
-	dotenv.config();
-}
 export default {
 	kit: {
-		adapter: adapter()
+		adapter: adapter({
+			// default options are shown
+			out: 'build',
+			precompress: false,
+			env: {
+				port: 'PORT'
+			}
+		}),
+		// Include other configuration options here
 	}
 };
