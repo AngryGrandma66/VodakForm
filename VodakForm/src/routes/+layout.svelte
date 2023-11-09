@@ -1,5 +1,5 @@
 <script>
-
+    import { goto } from '$app/navigation';
     export let data;
 
     async function handleLogout() {
@@ -16,10 +16,11 @@
     }
     async function redirectToBoats(){
         if (data.props.userId===null){
-            window.location.href = '/login';            }
+           await goto('/login');
+        }
         else{
             console.log(data.props.userId);
-            window.location.href = `/user/${data.props.userId}`;
+            await goto(`/user/${data.props.userId}`);
         }
     }
 </script>
@@ -27,10 +28,13 @@
 
 <nav>
     <a href="/">Home</a>
+    {#if data.props.userId===null}
     <a href="/registrace">Registrovat se</a>
     <a href="/login">Přihlásit se</a>
+    {:else}
     <button on:click={handleLogout}>Odhlásit se</button>
     <button on:click={redirectToBoats}>Loďe</button>
+    {/if}
 </nav>
 
 <slot></slot>
