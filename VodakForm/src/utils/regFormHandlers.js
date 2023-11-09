@@ -101,6 +101,7 @@ export async function regSubmitForm() {
     }
     if (!validatePassword(currentPassword)){
         alert('Heslo nesplňuje požadavky')
+        return false
     }
 
     if (currentPassword !== currentConfPassword){
