@@ -27,10 +27,10 @@
 
 
 <nav>
-    <a href="/">Home</a>
+    <button on:click={() =>goto('/')}>Home</button>
     {#if data.props.userId===null}
-    <a href="/registrace">Registrovat se</a>
-    <a href="/login">Přihlásit se</a>
+        <button on:click={() =>goto('/registrace')}>Registrovat se</button>
+        <button on:click={() =>goto('/login')}>Přihlásit se</button>
     {:else}
     <button on:click={handleLogout}>Odhlásit se</button>
     <button on:click={redirectToBoats}>Loďe</button>

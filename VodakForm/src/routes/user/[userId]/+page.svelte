@@ -1,9 +1,7 @@
 <script>
 
-    // Props passed from `+page.server.js`
     export let data;
 
-    // Function to accept an invitation
     /**
 	 * @param {any} friendNick
 	 */
@@ -20,9 +18,7 @@
             if (response.ok) {
                 const result = await response.json();
                 if (result.success) {
-                    // Update the UI or redirect the user
                     console.log('Invitation accepted');
-                    // Reload the page to update the list
                     window.location.reload();
                 } else {
                     console.error('Failed to accept invitation');

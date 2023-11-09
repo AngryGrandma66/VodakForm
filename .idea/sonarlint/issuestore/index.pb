@@ -33,8 +33,6 @@ _
 -VodakForm/src/routes/user/[userId]/+server.js,7\d\7d4d86ec422a100a8fbf920d4039d6722747126c
 Q
 !VodakForm/src/lib/sessionStore.js,b\b\bbddde529262be374162900ce724cbb3d4e8e2f3
-T
-$VodakForm/src/routes/+page.server.js,8\6\86a75c8e17211e8f0555d04c356606be26723779
 W
 'VodakForm/src/routes/login/+page.svelte,0\2\0237550b9b336db442f57855c3336ff6cc05415c
 \
@@ -43,8 +41,6 @@ V
 &VodakForm/src/utils/logFormHandlers.js,c\2\c20a1966428a1a6ab426dba78936875f1991b281
 J
 VodakForm/svelte.config.js,3\3\3356200a912c7e15fd30b922a11d85e2e6814dd8
->
-VodakForm/.env,c\7\c79d56203f75727453629ded5b04263ae459d059
 F
 VodakForm/package.json,b\9\b9c6ede6055d1a0352e6628b80b3aecadf9d8bd1
 K
@@ -53,12 +49,6 @@ V
 &VodakForm/src/routes/logout/+server.js,2\2\229337fd1ef7ab2087dbcc85b8ca9e3cc8c2d0ea
 G
 VodakForm/src/stores.js,9\3\9359b4de8ab4a2f1732c708a5b485182cc3eb937
-]
--VodakForm/src/routes/check-session/+server.js,0\6\0655bee25aad2fef285c666c04129966144cc058
-M
-VodakForm/tailwind.config.cjs,9\4\946c595d44aa95adc240c1ee8a653b1ab2554cc8
-L
-VodakForm/postcss.config.cjs,8\9\89d8347f8dbca16c5d1a20691b77f2a8dd7bb62b
 F
 VodakForm/src/app.html,6\0\6063cd4e6945847cb895655146f25e34fbf888b5
 S

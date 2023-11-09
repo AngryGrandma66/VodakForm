@@ -108,7 +108,6 @@
                maxlength="64"
                minlength="8"
                required>
-
         <button type="submit">Odeslat</button>
         <button type="button" on:click={() => window.history.back()}>Storno</button>
     </form>

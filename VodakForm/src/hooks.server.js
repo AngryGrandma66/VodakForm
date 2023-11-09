@@ -1,18 +1,22 @@
 import {getSession, validateSession} from '$lib/sessionStore';
 
 export async function handle({ event, resolve }) {
-    const cookies = event.request.headers.get('cookie') || '';
-    const sessionId = parseCookie(cookies, 'session_id');
+    try {
+        const cookies = event.request.headers.get('cookie') || '';
+        const sessionId = parseCookie(cookies, 'session_id');
 
-    if (sessionId) {
-        const userSession = await getSession(sessionId);
-        if (userSession && validateSession(userSession)) { // Check if userSession is not undefined
-            // @ts-ignore
-            event.locals.user = userSession;
+        if (sessionId) {
+            const userSession = await getSession(sessionId);
+            if (userSession && validateSession(userSession)) {
+                // @ts-ignore
+                event.locals.user = userSession;
+            }
         }
+        return await resolve(event);
+    } catch (err) {
+        console.error('An error occurred:', err);
+        throw err;
     }
-    // If the session is not valid, `event.locals.user` will be undefined
-    return resolve(event);
 }
 
 /**
