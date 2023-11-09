@@ -6,8 +6,8 @@ export async function handle({ event, resolve }) {
 
     if (sessionId) {
         const userSession = await getSession(sessionId);
-        if (validateSession(userSession)) {
-            event.locals.user = userSession; // Store the entire session object
+        if (userSession && validateSession(userSession)) { // Check if userSession is not undefined
+            event.locals.user = userSession;
         }
     }
     // If the session is not valid, `event.locals.user` will be undefined
