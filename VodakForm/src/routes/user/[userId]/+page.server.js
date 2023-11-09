@@ -11,14 +11,11 @@ export async function load({request}) {
         throw redirect(302, '/login');
     }
 
-    // Fetch user-specific data and available boat invitations
     const userData = await fetchUserData(session.userId);
     const boats = await fetchBoats();
 
-    // Find invitations for the user
     const invitations = await fetchInvitations(session.userId)
 
-    // Return user data and boats to the page
     return {
         props: {
             userData, boats, invitations
@@ -59,7 +56,6 @@ async function fetchInvitations(userId) {
         const usersArray = await readRegistrations();
         const invitations = usersArray.filter((/** @type {{ friendNick: any; }} */ user) => user.friendNick === userId);
 
-        // Exclude any invitations where a boat already exists.
         const boats = await readBoats();
         return invitations.filter((/** @type {{ username: any; }} */ invitation) =>
             !boats.some((/** @type {{ nick1: any; nick2: any; }} */ boat) =>
