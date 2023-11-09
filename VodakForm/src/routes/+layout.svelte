@@ -1,5 +1,6 @@
 <script>
     import { goto } from '$app/navigation';
+    import '$styles/global.css';
     export let data;
 
     async function handleLogout() {
@@ -33,7 +34,7 @@
         <button on:click={() =>goto('/login')}>Přihlásit se</button>
     {:else}
     <button on:click={handleLogout}>Odhlásit se</button>
-    <button on:click={redirectToBoats}>Loďe</button>
+    <button on:click={redirectToBoats}>Lodě</button>
     {/if}
 </nav>
 

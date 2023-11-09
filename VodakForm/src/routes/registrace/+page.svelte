@@ -39,6 +39,7 @@
     <form on:submit|preventDefault={regSubmitForm}>
 
         <label for="username">Přezdívka:</label>
+        <span class="guide-text">Přezdívka by měla být dlouhá 2-20 znaků a může obsahovat pouze písmena a čísla.</span>
         <input type="text"
                id="username"
                name="username"
@@ -57,6 +58,7 @@
         </select>
 
         <label for="sClass">Třída:</label>
+        <span class="guide-text">Třída by měla být ve formátu písmene (A, C nebo E), následovaného číslem (1-4) a dalším písmenem (A, B nebo C), například 'A1a'.</span>
         <input type="text"
                id="sClass"
                name="sClass"
@@ -68,6 +70,7 @@
                maxlength="3">
 
         <label for="email">email:</label>
+        <span class="guide-text">Email by měl být platnou e-mailovou adresou, přičemž doménová část může být dlouhá až 255 znaků.</span>
         <input type="text"
                id="email"
                name="email"
@@ -79,6 +82,7 @@
                maxlength="320">
 
         <label for="friendNick">Kamarád na lodi (nepovinné):</label>
+        <span class="guide-text">Kamarád na lodi by měl splňovat stejné podmínky jako řezdívka</span>
         <input type="text"
                id="friendNick"
                name="kanoe_kamarad"
@@ -88,6 +92,7 @@
                maxlength="20">
 
         <label for="password">Heslo:</label>
+        <span class="guide-text">Heslo musí mít alespoň 8 znaků, včetně jednoho čísla, jednoho velkého písmene, jednoho malého písmene a jednoho speciálního znaku.</span>
         <input type="password"
                id="password"
                name="password"

@@ -221,3 +221,9 @@ OVodakForm/.svelte-kit/output/server/entries/pages/user/_userId_/_page.server.js
 OVodakForm/.svelte-kit/output/server/entries/pages/user/_userId_/_page.svelte.js,9\9\990ce01c8155eae8c7b5e29fce12154c4fb5d579
 V
 &VodakForm/src/routes/+layout.server.js,8\8\88964e6eb387627aae18294bf2a0f9e4e729556c
+K
+VodakForm/static/global.css,0\5\057d271e186e5f65ed877b10ff6692a52cd37d49
+H
+VodakForm/src/global.css,2\9\292cdd8c5ce8d9d6a2120ea0b9445a749d2190a0
+O
+VodakForm/src/styles/global.css,a\2\a233554bb88b1d5d07052ce07eb2d588491a8ea1

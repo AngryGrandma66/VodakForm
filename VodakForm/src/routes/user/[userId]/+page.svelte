@@ -36,26 +36,116 @@
 
 {#if data.props.userData.username}
     <div>
-        <h1>Welcome, {data.props.userData.username}!</h1>
-        <h2>Boats</h2>
+        <h1>Vítej, {data.props.userData.username}!</h1>
+
+        <h2>Lodě</h2>
         <ul>
             {#each data.props.boats as boat}
-                <li>{boat.nick1} & {boat.nick2}</li>
+                <li class="boat">{boat.nick1} & {boat.nick2}</li>
             {/each}
         </ul>
 
-        <h2>Your Invitations</h2>
+        <h2>Vaše pozvánky</h2>
         <ul>
             {#each data.props.invitations as invitation}
-                <li>
-                    {invitation.username} has invited you to join a boat.
-                    <button on:click={() => acceptInvitation(invitation.username)}>Accept Invitation</button>
+                <li class="invitation">
+                    {invitation.username} vás pozval na loď.
+                    <button on:click={() => acceptInvitation(invitation.username)}>Přijmout Pozvánku</button>
                 </li>
             {/each}
         </ul>
         <button type="button" on:click={() => window.history.back()}>Storno</button>
-
     </div>
 {:else}
-    <p>Loading user data...</p>
+    <p class="loading">Načítání uživatelských dat...</p>
 {/if}
+
+<style>/* Center the main content */
+div {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Style headings for clarity */
+h1 {
+    color: #4a90e2;
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    color: #333;
+    font-size: 1.5em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+/* Style for boats and invitations lists */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: #f7f7f7;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #4a90e2;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #357ab8;
+}
+
+/* Additional styles for visual clarity */
+.invitation {
+    background-color: #eaf1f7;
+    border-left: 5px solid #4a90e2;
+    padding-left: 15px;
+}
+
+.boat {
+    background-color: #e7eaf3;
+    border-left: 5px solid #6a7fcb;
+    padding-left: 15px;
+}
+
+/* Style for the 'Storno' button */
+button[type="button"] {
+    background-color: #ff6b6b;
+}
+
+button[type="button"]:hover {
+    background-color: #ff5252;
+}
+
+/* Add a loading animation for loading state */
+.loading {
+    font-size: 1.2em;
+    color: #666;
+    text-align: center;
+    animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+</style>
