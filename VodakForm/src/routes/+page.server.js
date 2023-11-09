@@ -14,9 +14,14 @@ export async function load({request}) {
         }
     };
 }
+/**
+ * @param {any} cookieHeader
+ * @param {string} name
+ */
 function parseCookie(cookieHeader, name) {
     const value = `; ${cookieHeader}`;
     const parts = value.split(`; ${name}=`);
+    // @ts-ignore
     if (parts.length === 2) return parts.pop().split(';').shift();
     return null;
 }

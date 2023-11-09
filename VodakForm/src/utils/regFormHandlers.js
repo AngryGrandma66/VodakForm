@@ -4,6 +4,9 @@ import {validateUsername,validateEmail, validatePassword} from "./validation.js"
 
 
 
+/**
+ * @param {string} email
+ */
 export async function checkEmailUniqueness(email) {
     if (!validateEmail(email)) {
         emailUnique.set(false);
@@ -115,7 +118,7 @@ export async function regSubmitForm() {
     };
     // Submit the form data
     const result = await submitData(formData);
-    if (result && result.success) {
+    if (result?.success) {
         alert('Registrace Úspěšná');
         // Optionally reset the form or redirect the user
         window.history.back()

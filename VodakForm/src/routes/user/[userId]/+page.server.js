@@ -26,32 +26,43 @@ export async function load({request}) {
     };
 }
 
+/**
+ * @param {any} cookieHeader
+ * @param {string} name
+ */
 function parseCookie(cookieHeader, name) {
     const value = `; ${cookieHeader}`;
     const parts = value.split(`; ${name}=`);
+    // @ts-ignore
     if (parts.length === 2) return parts.pop().split(';').shift();
     return null;
 }
 
+/**
+ * @param {any} userId
+ */
 async function fetchUserData(userId) {
     try {
         const usersArray = await readRegistrations();
-        return usersArray.find(user => user.username === userId)
+        return usersArray.find((/** @type {{ username: any; }} */ user) => user.username === userId)
     } catch (err) {
         console.error('Error fetching user data:', err);
         throw error(500, 'Error fetching user data');
     }
 }
 
+/**
+ * @param {any} userId
+ */
 async function fetchInvitations(userId) {
     try {
         const usersArray = await readRegistrations();
-        const invitations = usersArray.filter(user => user.friendNick === userId);
+        const invitations = usersArray.filter((/** @type {{ friendNick: any; }} */ user) => user.friendNick === userId);
 
         // Exclude any invitations where a boat already exists.
         const boats = await readBoats();
-        return invitations.filter(invitation =>
-            !boats.some(boat =>
+        return invitations.filter((/** @type {{ username: any; }} */ invitation) =>
+            !boats.some((/** @type {{ nick1: any; nick2: any; }} */ boat) =>
                 boat.nick1 === userId ||
                 boat.nick2 === userId ||
                 boat.nick1 === invitation.username ||

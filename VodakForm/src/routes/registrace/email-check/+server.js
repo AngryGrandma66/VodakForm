@@ -1,7 +1,10 @@
 import { readRegistrations } from '$lib/fileRead.js'
+/**
+ * @param {any} email
+ */
 async function isEmailUnique(email) {
     const registrations = await readRegistrations();
-    return !registrations.some(reg => reg.email === email);
+    return !registrations.some((/** @type {{ email: any; }} */ reg) => reg.email === email);
 }
 
 export async function GET({ url }) {

@@ -4,6 +4,9 @@
     export let data;
 
     // Function to accept an invitation
+    /**
+	 * @param {any} friendNick
+	 */
     async function acceptInvitation(friendNick) {
         try {
             const response = await fetch(`./${data.props.userData.username}`, {

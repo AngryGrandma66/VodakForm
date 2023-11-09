@@ -4,10 +4,13 @@ import { serialize } from 'cookie';
 import { createSession } from '$lib/sessionStore';
 import { readRegistrations } from '$lib/fileRead.js'
 
+/**
+ * @param {any} searchValue
+ */
 async function findUser(searchValue) {
     try {
         const usersArray = await readRegistrations()
-        return usersArray.find(user => user.username === searchValue);
+        return usersArray.find((/** @type {{ username: any; }} */ user) => user.username === searchValue);
     } catch (err) {
         console.error('Error processing login:', err);
         throw error(500, 'Error processing login');
@@ -16,10 +19,13 @@ async function findUser(searchValue) {
 
 
 
+/**
+ * @param {{ loginUsername: any; loginPassword: string | Buffer; }} formData
+ */
 async function authenticateUser(formData) {
-    const user = await findUser(formData.loginUsername); // make sure the name of the form field matches
+    const user = await findUser(formData.loginUsername); 
     if (!user) {
-        return null; // Return null instead of false to indicate no user found
+        return null; 
     }
     const passwordMatches = await argon2.verify(user.password, formData.loginPassword);
 
@@ -31,7 +37,6 @@ export async function POST({ request }) {
         const formData = await request.json();
         const user = await authenticateUser(formData);
             if (!user) {
-            // User not found or password doesn't match
             return new Response(JSON.stringify({ success: false, message: 'Invalid username or password' }), {
                 status: 401,
                 headers: {
@@ -40,19 +45,15 @@ export async function POST({ request }) {
             });
         }
 
-        // User is authenticated, create a session ID
-        const sessionId = await createSession(user.username); // Use the username or another user identifier to create the session
+        const sessionId = await createSession(user.username); 
 
-        // Serialize the cookie
         const cookie = serialize('session_id', sessionId, {
             httpOnly: true,
-            maxAge: 60 * 60 * 24, // 1 day in seconds
+            maxAge: 60 * 60 * 24,
             sameSite: 'strict',
             path: '/',
-            // Add 'secure: true' if you're serving your site over HTTPS
         });
 
-        // Set the cookie in the response header
         return new Response(JSON.stringify({
             success: true,
             message: 'Logged in successfully',
@@ -64,7 +65,6 @@ export async function POST({ request }) {
             },
         });
     } catch (err) {
-        // Handle any other errors
         return new Response(JSON.stringify({ success: false, message: 'An error occurred during login' }), {
             status: 500,
             headers: {

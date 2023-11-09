@@ -7,6 +7,7 @@ export async function handle({ event, resolve }) {
     if (sessionId) {
         const userSession = await getSession(sessionId);
         if (userSession && validateSession(userSession)) { // Check if userSession is not undefined
+            // @ts-ignore
             event.locals.user = userSession;
         }
     }
@@ -14,9 +15,14 @@ export async function handle({ event, resolve }) {
     return resolve(event);
 }
 
+/**
+ * @param {any} cookieHeader
+ * @param {string} name
+ */
 function parseCookie(cookieHeader, name) {
     const value = `; ${cookieHeader}`;
     const parts = value.split(`; ${name}=`);
+    // @ts-ignore
     if (parts.length === 2) return parts.pop().split(';').shift();
     return null;
 }

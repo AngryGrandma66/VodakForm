@@ -1,6 +1,9 @@
 import { get } from 'svelte/store';
 import {loginPassword,loginUsername} from '../stores.js'
 
+/**
+ * @param {{ loginUsername: string; loginPassword: string; }} formData
+ */
 async function submitData(formData) {
     try {
         const response = await fetch('/login/submit', {

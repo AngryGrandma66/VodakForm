@@ -4,7 +4,9 @@ import path from 'path';
 
 export const dataFilePath = path.resolve('data/registrace.json');
 export const boatsFilePath = path.resolve('data/boats.json')
-// Function to read registrations from the JSON file
+/**
+ * @param {import("fs").PathLike | fs.FileHandle} path
+ */
 async function readData(path){
     try {
         const data = await fs.readFile(path, 'utf8');
@@ -12,7 +14,6 @@ async function readData(path){
     } catch (err) {
         // @ts-ignore
         if (err.code === 'ENOENT') {
-            // If the file does not exist, return an empty array
             await fs.writeFile(dataFilePath, JSON.stringify([]));
             return [];
         } else {
