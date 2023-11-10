@@ -1,5 +1,4 @@
 import { readRegistrations } from '$lib/fileRead.js'
-// Function to check if a username is unique
 /**
  * @param {any} username
  */
@@ -8,7 +7,6 @@ async function isUsernameUnique(username) {
     return !registrations.some((/** @type {{ username: any; }} */ reg) => reg.username === username);
 }
 
-// Endpoint to check the username uniqueness
 export async function GET({ url }) {
     const username = url.searchParams.get('username');
     if (!username) {
