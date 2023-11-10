@@ -7,7 +7,6 @@
 
 
     onMount(() => {
-        // Debounce the uniqueness check to avoid too many API calls
         /**
 		 * @type {number | undefined}
 		 */
@@ -117,13 +116,3 @@
         <button type="button" on:click={() => window.history.back()}>Storno</button>
     </form>
 </main>
-
-<style>
-    .valid {
-        border-color: green;
-    }
-
-    .invalid {
-        border-color: red;
-    }
-</style>
