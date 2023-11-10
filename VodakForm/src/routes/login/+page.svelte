@@ -33,13 +33,3 @@
     </form>
 
 </main>
-
-<style>
-    .valid {
-        border-color: green;
-    }
-
-    .invalid {
-        border-color: red;
-    }
-</style>
