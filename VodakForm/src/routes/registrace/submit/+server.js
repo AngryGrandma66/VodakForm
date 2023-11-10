@@ -4,9 +4,6 @@ import argon2 from "argon2";
 import {dataFilePath, readRegistrations} from "$lib/fileRead.js";
 
 
-
-// Function to read and write registrations
-
 /**
  * @param {{ username: string; isSwimmer: string; sClass: string; email: string; password: string | Buffer; friendNick: string | null; // Optional field
  *  }}  newRegistration
