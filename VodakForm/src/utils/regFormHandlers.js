@@ -14,7 +14,7 @@ export async function checkEmailUniqueness(email) {
     }
     try {
         const response = await fetch(`/registrace/email-check?email=${encodeURIComponent(email.toLowerCase().trim())}`);
-        emailUnique.set(response.ok); // If the status is 200, the email is unique
+        emailUnique.set(response.ok); 
     } catch (error) {
         console.error('Error checking email uniqueness', error);
     }
@@ -36,11 +36,7 @@ export async function checkUsernameUniqueness(username) {
     } catch (error) {
         console.error('Error checking username uniqueness', error);
     }
-
-
-    // Only run the AJAX call if we are in the browser
 }
-// Function to handle the form submission
 /**
  * @param {{ username: string; isSwimmer: string; sClass: string; email: string; password: string; friendNick: string | null; // Optional field
  }} formData
@@ -62,7 +58,6 @@ async function submitData(formData) {
     }
 }
 
-// Adjusted function to handle the form submission
 export async function regSubmitForm() {
     const currentUsername = get(username);
     const currentFriendNick = get(friendNick);
@@ -108,7 +103,6 @@ export async function regSubmitForm() {
         alert('Kontrola hesla se nerovna heslu')
         return false
     }
-    // Construct the form data object
     const formData = {
         username: currentUsername,
         isSwimmer: currentIsSwimmer,
@@ -117,11 +111,9 @@ export async function regSubmitForm() {
         password: currentPassword,
         friendNick: currentFriendNick || null  // Optional field
     };
-    // Submit the form data
     const result = await submitData(formData);
     if (result?.success) {
         alert('Registrace Úspěšná');
-        // Optionally reset the form or redirect the user
         window.history.back()
     } else {
         alert('Registrace se nepovedla. Prosím zkuste znovu');
